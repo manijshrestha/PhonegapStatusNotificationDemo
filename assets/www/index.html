@@ -1,11 +1,20 @@
 <html>
-<head>
-<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
-</head>
+	<head>
+		<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+		<script type="text/javascript" charset="utf-8" src="statusbarnotification.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		
+			function sendNotification() {
+				var message = document.getElementById("message");
+				window.plugins.statusBarNotification.notify("Sample Notification", message.value);
+			}
+			
+		</script>
+	</head>
 
-<body>
-	<input type="text" id="message" />
-	<input type="button" id="button" value="Notify" />
-</body>
+	<body>
+		<input type="text" id="message" />
+		<input type="button" id="button" value="Notify" onclick = "sendNotification()" />
+	</body>
 
 </html>
