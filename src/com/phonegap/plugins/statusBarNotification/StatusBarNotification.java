@@ -63,7 +63,7 @@ public class StatusBarNotification extends Plugin {
                 String body = data.getString(2);
                 String flag = data.getString(3);
                 Log.d("NotificationPlugin", "Notification: " + tag + ", " + title + ", " + body);
-                int notificationFlag = Integer.parseInt(flag);
+                int notificationFlag = getFlagValue(flag);
                 showNotification(tag, title, body, notificationFlag);
                 result = new PluginResult(Status.OK);
             } catch (JSONException jsonEx) {
@@ -89,6 +89,25 @@ public class StatusBarNotification extends Plugin {
     }
 
     /**
+     * Helper method that returns a flag value to be used for notification
+     * by default it will return 16 representing FLAG_NO_CLEAR
+     * 
+     * @param flag
+     * @return int value of the flag
+     */
+    private int getFlagValue(String flag) {
+		int flagVal = Notification.FLAG_AUTO_CANCEL;
+		
+		// We trust the flag value as it comes from our JS constant.
+		// This is also backwards compatible as it will be emtpy.
+		if (!flag.isEmpty()){
+			flagVal = Integer.parseInt(flag);
+		}
+		
+		return flagVal;
+	}
+
+	/**
      * 	Displays status bar notification
      *
      * 	@param tag Notification tag.

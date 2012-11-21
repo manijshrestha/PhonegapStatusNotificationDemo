@@ -6,7 +6,7 @@
 		
 			function sendNotification() {
 				var message = document.getElementById("message");
-				window.plugins.statusBarNotification.notify("Sample Notification", message.value, Flag.FLAG_NO_CLEAR);
+				window.plugins.statusBarNotification.notify("Sample Notification", message.value);
 			}
 			
 			function clearNotification() {
