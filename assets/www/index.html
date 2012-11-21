@@ -6,7 +6,11 @@
 		
 			function sendNotification() {
 				var message = document.getElementById("message");
-				window.plugins.statusBarNotification.notify("Sample Notification", message.value);
+				window.plugins.statusBarNotification.notify("Sample Notification", message.value, Flag.FLAG_NO_CLEAR);
+			}
+			
+			function clearNotification() {
+				window.plugins.statusBarNotification.clear();
 			}
 			
 		</script>
@@ -14,7 +18,8 @@
 
 	<body>
 		<input type="text" id="message" />
-		<input type="button" id="button" value="Notify" onclick = "sendNotification()" />
+		<input type="button" id="notify" value="Notify" onclick="sendNotification()" />
+		<input type="button" id="clear" value="Clear" onclick="clearNotification()"/>
 	</body>
 
 </html>

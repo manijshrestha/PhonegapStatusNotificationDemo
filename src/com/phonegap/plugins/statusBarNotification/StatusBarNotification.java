@@ -61,8 +61,10 @@ public class StatusBarNotification extends Plugin {
                 String tag = data.getString(0);
                 String title = data.getString(1);
                 String body = data.getString(2);
+                String flag = data.getString(3);
                 Log.d("NotificationPlugin", "Notification: " + tag + ", " + title + ", " + body);
-                showNotification(tag, title, body);
+                int notificationFlag = Integer.parseInt(flag);
+                showNotification(tag, title, body, notificationFlag);
                 result = new PluginResult(Status.OK);
             } catch (JSONException jsonEx) {
                 Log.d("NotificationPlugin", "Got JSON Exception "
@@ -74,6 +76,7 @@ public class StatusBarNotification extends Plugin {
                 String tag = data.getString(0);
                 Log.d("NotificationPlugin", "Notification cancel: " + tag);
                 clearNotification(tag);
+                result = new PluginResult(Status.OK);
             } catch (JSONException jsonEx) {
                 Log.d("NotificationPlugin", "Got JSON Exception " + jsonEx.getMessage());
                 result = new PluginResult(Status.JSON_EXCEPTION);
@@ -92,12 +95,12 @@ public class StatusBarNotification extends Plugin {
      *  @param contentTitle	Notification title
      *  @param contentText	Notification text
      * */
-    public void showNotification( CharSequence tag, CharSequence contentTitle, CharSequence contentText ) {
+    public void showNotification( CharSequence tag, CharSequence contentTitle, CharSequence contentText, int flag) {
         String ns = Context.NOTIFICATION_SERVICE;
         context = cordova.getActivity().getApplicationContext();
         mNotificationManager = (NotificationManager) context.getSystemService(ns);
 
-        Notification noti = StatusNotificationIntent.buildNotification(context, tag, contentTitle, contentText);
+        Notification noti = StatusNotificationIntent.buildNotification(context, tag, contentTitle, contentText, flag);
         mNotificationManager.notify(tag.hashCode(), noti);
     }
 
