@@ -20,7 +20,7 @@ public class StatusNotificationIntent {
         PackageManager pm = context.getPackageManager();
         Intent notificationIntent = pm.getLaunchIntentForPackage(context.getPackageName());
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        notificationIntent.putExtra("notificationTag", tag.hashCode());
+        notificationIntent.putExtra("notificationTag", tag);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         noti.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
